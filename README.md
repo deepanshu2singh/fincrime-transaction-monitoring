@@ -1,4 +1,4 @@
-# FinCrime Transaction Monitoring — BigQuery · dbt · Looker Studio
+﻿# FinCrime Transaction Monitoring — BigQuery · dbt · Looker Studio
 
 A transaction-monitoring analytics pipeline built on a modern challenger-bank analytics stack: raw payment data landed in **BigQuery**, transformed and tested with **dbt** into a dimensional star schema, scored for fraud risk, evaluated against real labels, and surfaced in a **Looker Studio** dashboard.
 
@@ -43,7 +43,9 @@ raw_transactions (source)
  dim_time  dim_accounts  dim_transaction_types   -- dimensions (relationships-tested)
 ```
 
-*(Insert your dbt lineage screenshot here, e.g. `docs/lineage.png`.)*
+
+
+
 
 ---
 
@@ -112,7 +114,7 @@ A Looker Studio dashboard reads directly from `fct_transactions`:
 - **Fraud rate by transaction type** — TRANSFER (~16%) and CASH_OUT (~4.5%); all other types 0%
 - **Activity over time** — transaction volume and fraud count across the simulation run
 
-*(Insert your dashboard screenshot here, e.g. `docs/dashboard.png`.)*
+
 
 ---
 
@@ -166,3 +168,4 @@ This is the **transaction-monitoring** layer of a three-part financial-crime por
 - **This project** — transaction monitoring & warehouse modelling (internal data)
 
 Together they span the due-diligence stack — screening, open-source intelligence, and internal analytics — built on the tools a modern FinCrime data team actually uses.
+
