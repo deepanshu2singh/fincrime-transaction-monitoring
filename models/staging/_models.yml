@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: stg_transactions
+    description: "Cleaned, renamed PaySim transactions. One row per transaction."
+    columns:
+      - name: amount
+        description: "Transaction amount."
+        data_tests:
+          - not_null
+
+      - name: transaction_type
+        description: "Type of transaction (PaySim category)."
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: ['PAYMENT', 'TRANSFER', 'CASH_OUT', 'CASH_IN', 'DEBIT']
+
+      - name: is_fraud
+        description: "1 if fraudulent, else 0."
+        data_tests:
+          - accepted_values:
+              values: [0, 1]
+              quote: false        # is_fraud is INT64; without this BigQuery errors
+                                  # ("IN for argument types INT64 and STRING")
+
+      - name: origin_account
+        description: "Account that initiated the transaction."
+        data_tests:
+          - not_null
+
+# NOTE: deliberately no `unique` test - PaySim has no transaction ID and
+# accounts/steps repeat, so nothing is genuinely unique. Tests match reality.

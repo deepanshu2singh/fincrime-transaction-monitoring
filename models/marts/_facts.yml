@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: fct_transactions
+    description: >
+      Central fact table - one row per transaction. Foreign keys join out to
+      dim_time (step_hour), dim_accounts (origin_account), and
+      dim_transaction_types (transaction_type). Measures include amount,
+      balance errors, risk_score, and the fraud/suspicious flags.
+    columns:
+      - name: transaction_type
+        description: "FK to dim_transaction_types."
+        data_tests:
+          - relationships:
+              to: ref('dim_transaction_types')
+              field: transaction_type
+
+      - name: origin_account
+        description: "FK to dim_accounts."
+        data_tests:
+          - relationships:
+              to: ref('dim_accounts')
+              field: origin_account
+
+      - name: step_hour
+        description: "FK to dim_time."
+        data_tests:
+          - relationships:
+              to: ref('dim_time')
+              field: step_hour

@@ -1,0 +1,22 @@
+# NEVER commit service account keys
+*.json
+
+# dbt
+target/
+dbt_packages/
+logs/
+.user.yml
+
+# Python / env
+venv/
+__pycache__/
+*.pyc
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data files (PaySim is large; do not commit)
+*.csv
+*.csv.gz

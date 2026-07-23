@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: fincrime
+    database: fincrime-501917   # in BigQuery, "database" = GCP project
+    schema: fincrime            # "schema" = BigQuery dataset
+    tables:
+      - name: raw_transactions

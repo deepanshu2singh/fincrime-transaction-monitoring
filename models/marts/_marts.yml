@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: int_transactions_features
+    description: >
+      Intermediate model. Filters to TRANSFER and CASH_OUT (the only fraud-bearing
+      types) and adds balance-error features. A large error means the account
+      balances don't reconcile after the transaction - the core fraud signal in PaySim.
+    columns:
+      - name: error_balance_orig
+        description: "origin_balance_after + amount - origin_balance_before. ~0 for a clean transaction."
+      - name: error_balance_dest
+        description: "dest_balance_before + amount - dest_balance_after. Large values are the strongest fraud tell."
+
+  - name: mart_suspicious_activity
+    description: >
+      Analyst-facing mart (materialised as a table). Scores each transaction against
+      three rules, sums them into risk_score, and flags is_suspicious when at least
+      two rules fire. Achieves ~83% recall at ~13% precision on PaySim labels.
+    columns:
+      - name: risk_score
+        description: "Count of rules triggered (0-3)."
+      - name: is_suspicious
+        description: "TRUE when risk_score >= 2. Tunable operating point (see README)."
+
+  - name: dim_time
+    description: >
+      Relative time dimension from PaySim's `step` (elapsed hours). Supports
+      velocity and hour-of-day analysis only - NOT calendar-based features,
+      as PaySim has no real dates.
+
+  - name: dim_accounts
+    description: >
+      One row per origin account with behaviour aggregates and a suspicious_rate.
+      Covers accounts that sent TRANSFER/CASH_OUT transactions.
+
+  - name: dim_transaction_types
+    description: "Lookup dimension: one row per transaction type with its fraud rate."
