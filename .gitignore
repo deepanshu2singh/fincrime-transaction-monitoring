@@ -1,4 +1,4 @@
-# NEVER commit service account keys
+# Non-negotiable
 *.json
 
 # dbt
