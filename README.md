@@ -42,11 +42,9 @@ raw_transactions (source)
      ┌──────┼──────┐
  dim_time  dim_accounts  dim_transaction_types   -- dimensions (relationships-tested)
 ```
+![dbt lineage graph](docs/lineage1.png)
 
-
-
-
-
+![dbt lineage graph](docs/lineage.png)
 ---
 
 ## The data
@@ -114,8 +112,7 @@ A Looker Studio dashboard reads directly from `fct_transactions`:
 - **Fraud rate by transaction type** — TRANSFER (~16%) and CASH_OUT (~4.5%); all other types 0%
 - **Activity over time** — transaction volume and fraud count across the simulation run
 
-
-
+![Looker Studio dashboard](docs/dashboard.png)
 ---
 
 ## Key findings
