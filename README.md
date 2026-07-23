@@ -23,6 +23,8 @@ Everything here runs on the free BigQuery sandbox and free dbt/Looker Studio tie
 | Visualisation | Looker Studio |
 | Cloud | Google Cloud Platform |
 
+![Datastack](docs/datastack.png)
+
 ---
 
 ## Architecture
